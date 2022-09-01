@@ -1,0 +1,37 @@
+﻿syntax = "proto3";
+
+option csharp_namespace = "grpc_service.Protos";
+import "google/protobuf/empty.proto"; 
+
+package country;
+
+service CountryCityService {
+
+    rpc GetCountries (google.protobuf.Empty) returns (stream CountryResponse);
+    rpc GetCities (CountryRequest) returns (stream CityResponse);
+    rpc GetCityDetail(CityDetailRequest) returns (CityDetailResponse);
+}
+
+message CountryRequest {
+  int32 countryid = 1;
+}
+
+message CountryResponse {
+  string name = 1;
+}
+
+message CityResponse {
+  string name = 1;
+  int32 countryid=2;
+}
+
+message CityDetailRequest {
+    int32 cityid = 1;
+}
+
+message CityDetailResponse {
+    int32 cityid = 1;
+    string cityname = 2;
+    int32 citypopulation = 3;
+}
+
